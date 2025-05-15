@@ -28,6 +28,8 @@ jobs:
           echo Action Actor ${{ github.actor }}
           echo Action Run Number ${{ github.run_number }}
           echo Repository Name ${{ github.event.repository.full_name }}
+          echo Input Host ${{ inputs.HOST }}
+          echo Input Host ${{ secrets.HOST }}
         shell: bash
 
       - name: Checkout

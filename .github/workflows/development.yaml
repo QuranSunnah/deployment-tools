@@ -31,6 +31,24 @@ jobs:
           echo Input Host ${{ inputs.HOST }}
           echo Input Host ${{ secrets.HOST }}
         shell: bash
+      - name: environment variables
+        run: |
+          echo "ENV_HTTP_PROXY=>${{ vars.ENV_HTTP_PROXY }}" >> .env
+          echo "REPO_ENV_HTTP_PROXY=>${{ vars.REPO_ENV_HTTP_PROXY }}" >> .env
+          echo "ORG_ENV_HTTP_PROXY=>${{ vars.ORG_ENV_HTTP_PROXY }}" >> .env
+          echo "SEC_HTTP_PROXY=>${{ secrets.SEC_HTTP_PROXY }}" >> .env
+          echo "REPO_SEC_HTTP_PROXY=>${{ secrets.REPO_SEC_HTTP_PROXY }}" >> .env
+          echo "ORG_SEC_HTTP_PROXY=>${{ secrets.ORG_SEC_HTTP_PROXY }}" >> .env
+          echo "ENVIRONMENT=${{ inputs.ENVIRONMENT }}" >> .env
+          echo "TAG=${{ inputs.TAG }}" >> .env
+          echo "HOST=${{ secrets.HOST }}" >> .env
+          echo "USERNAME=${{ secrets.USERNAME }}" >> .env
+          echo "GITHUB_ACTOR=${{ github.actor }}" >> .env
+          echo "GITHUB_RUN_NUMBER=${{ github.run_number }}" >> .env
+          echo "GITHUB_REPOSITORY=${{ github.event.repository.full_name }}" >> .env
+          echo "GITHUB_REPOSITORY_OWNER=${{ github.event.repository.owner.login }}" >> .env
+          echo "GITHUB_REPOSITORY_NAME=${{ github.event.repository.name }}" >> .env
+        shell: bash
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,6 +56,12 @@ jobs:
           repository: ${{ github.event.repository.full_name }}
           fetch-depth: 0
           submodules: true
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.ORG_SEC_DOCKER_USERNAME }}
+          password: ${{ secrets.ORG_SEC_DOCKER_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -48,5 +72,5 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          push: false
-          tags: user/app:${{ inputs.TAG }}
+          push: true
+          tags: ravenkaisar/email-notifications-ms:${{ inputs.TAG }}

@@ -46,6 +46,7 @@ jobs:
         shell: bash
       - name: environment variables
         run: |
+          touch .env
           echo "ENV_HTTP_PROXY=>${{ vars.ENV_HTTP_PROXY }}" >> .env
           echo "REPO_ENV_HTTP_PROXY=>${{ vars.REPO_ENV_HTTP_PROXY }}" >> .env
           echo "ORG_ENV_HTTP_PROXY=>${{ vars.ORG_ENV_HTTP_PROXY }}" >> .env
@@ -64,7 +65,7 @@ jobs:
           echo "GITHUB_REPOSITORY_OWNER=${{ github.event.repository.owner.login }}" >> .env
           echo "GITHUB_REPOSITORY_NAME=${{ github.event.repository.name }}" >> .env
         shell: bash
-        
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 

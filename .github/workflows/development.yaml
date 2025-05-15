@@ -23,32 +23,17 @@ jobs:
     steps:
       - name: Checkout code
         run: |
-          echo ${{ secrets.MVP_API_BASE_URL }}
-          echo ${{ github.repository }}
-          echo ${{ inputs.TAG }}
-          echo ${{ inputs.ENVIRONMENT }}
-          echo ${{ secrets.HOST }}
-          echo ${{ inputs.HOST }}
-          echo ${{ github.sha }}
-          echo ${{ github.event_name }}
-          echo ${{ github.event.action }}
-          echo ${{ github.actor }}
-          echo ${{ github.ref }}
-          echo ${{ github.head_ref }}
-          echo ${{ github.base_ref }}
-          echo ${{ github.workflow }}
-          echo ${{ github.run_id }}
-          echo ${{ github.run_number }}
-          echo ${{ github.event.repository.name }}
-          echo ${{ github.event.repository.full_name }}
-          echo ${{ github.event.repository.owner.login }}
-          echo ${{ github.event.repository.owner.id }}
+          echo Input Tag ${{ inputs.TAG }}
+          echo Input Environment ${{ inputs.ENVIRONMENT }}
+          echo Action Actor ${{ github.actor }}
+          echo Action Run Number ${{ github.run_number }}
+          echo Repository Name ${{ github.event.repository.full_name }}
         shell: bash
 
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}
+          repository: ${{ github.event.repository.full_name }}
           fetch-depth: 0
           submodules: true
 

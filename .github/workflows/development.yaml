@@ -47,14 +47,14 @@ jobs:
       - name: environment variables
         run: |
           touch .env
-          echo "ENV_HTTP_PROXY=>${{ vars.ENV_HTTP_PROXY }}" >> .env
-          echo "REPO_ENV_HTTP_PROXY=>${{ vars.REPO_ENV_HTTP_PROXY }}" >> .env
-          echo "ORG_ENV_HTTP_PROXY=>${{ vars.ORG_ENV_HTTP_PROXY }}" >> .env
-          echo "SEC_HTTP_PROXY=>${{ secrets.SEC_HTTP_PROXY }}" >> .env
-          echo "REPO_SEC_HTTP_PROXY=>${{ secrets.REPO_SEC_HTTP_PROXY }}" >> .env
-          echo "ORG_SEC_HTTP_PROXY=>${{ secrets.ORG_SEC_HTTP_PROXY }}" >> .env
-          echo "ORG_SEC_DOCKER_USERNAME=>${{ secrets.ORG_SEC_DOCKER_USERNAME }}" >> .env
-          echo "ORG_SEC_DOCKER_TOKEN=>${{ secrets.ORG_SEC_DOCKER_TOKEN }}" >> .env
+          echo "ENV_HTTP_PROXY=${{ vars.ENV_HTTP_PROXY }}" >> .env
+          echo "REPO_ENV_HTTP_PROXY=${{ vars.REPO_ENV_HTTP_PROXY }}" >> .env
+          echo "ORG_ENV_HTTP_PROXY=${{ vars.ORG_ENV_HTTP_PROXY }}" >> .env
+          echo "SEC_HTTP_PROXY=${{ secrets.SEC_HTTP_PROXY }}" >> .env
+          echo "REPO_SEC_HTTP_PROXY=${{ secrets.REPO_SEC_HTTP_PROXY }}" >> .env
+          echo "ORG_SEC_HTTP_PROXY=${{ secrets.ORG_SEC_HTTP_PROXY }}" >> .env
+          echo "ORG_SEC_DOCKER_USERNAME=${{ secrets.ORG_SEC_DOCKER_USERNAME }}" >> .env
+          echo "ORG_SEC_DOCKER_TOKEN=${{ secrets.ORG_SEC_DOCKER_TOKEN }}" >> .env
           echo "ENVIRONMENT=${{ inputs.ENVIRONMENT }}" >> .env
           echo "TAG=${{ inputs.TAG }}" >> .env
           echo "HOST=${{ secrets.HOST }}" >> .env

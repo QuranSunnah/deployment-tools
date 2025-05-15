@@ -10,9 +10,9 @@ on:
         type: string
         default: "latest"
     secrets:
-      HOST:
+      DOCKER_USERNAME:
         required: true
-      USERNAME:
+      DOCKER_TOKEN:
         required: true
 
 jobs:
@@ -41,7 +41,6 @@ jobs:
           echo Action Actor ${{ github.actor }}
           echo Action Run Number ${{ github.run_number }}
           echo Repository Name ${{ github.event.repository.full_name }}
-          echo Input Host ${{ inputs.HOST }}
           echo Input Host ${{ secrets.HOST }}
         shell: bash
       - name: environment variables
@@ -53,8 +52,8 @@ jobs:
           echo "SEC_HTTP_PROXY=${{ secrets.SEC_HTTP_PROXY }}" >> .env
           echo "REPO_SEC_HTTP_PROXY=${{ secrets.REPO_SEC_HTTP_PROXY }}" >> .env
           echo "ORG_SEC_HTTP_PROXY=${{ secrets.ORG_SEC_HTTP_PROXY }}" >> .env
-          echo "ORG_SEC_DOCKER_USERNAME=${{ secrets.ORG_SEC_DOCKER_USERNAME }}" >> .env
-          echo "ORG_SEC_DOCKER_TOKEN=${{ secrets.ORG_SEC_DOCKER_TOKEN }}" >> .env
+          echo "ORG_SEC_DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> .env
+          echo "ORG_SEC_DOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}" >> .env
           echo "ENVIRONMENT=${{ inputs.ENVIRONMENT }}" >> .env
           echo "TAG=${{ inputs.TAG }}" >> .env
           echo "HOST=${{ secrets.HOST }}" >> .env

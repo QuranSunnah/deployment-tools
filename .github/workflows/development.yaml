@@ -64,6 +64,7 @@ jobs:
           echo "GITHUB_REPOSITORY=${{ github.event.repository.full_name }}" >> .env
           echo "GITHUB_REPOSITORY_OWNER=${{ github.event.repository.owner.login }}" >> .env
           echo "GITHUB_REPOSITORY_NAME=${{ github.event.repository.name }}" >> .env
+          cat .env
         shell: bash
 
       - name: Set up QEMU
